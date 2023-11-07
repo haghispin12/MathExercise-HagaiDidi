@@ -1,6 +1,8 @@
 package com.example.mathexercise_hagaididi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,26 +14,39 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    int num1;
-    int num2;
+
     int answer;
     private TextView math;
     private Button chlng;
     private Button x20 ;
     private Button mulb ;
-    private TextView firstnum;
     private TextView mul ;
-    private TextView secondnum;
     private EditText ans;
     private Button chk;
     private Button save;
     private Button sau;
+    private TextView firstnum;
+    private TextView secondnum;
+    private MainViewModel viewModelMain;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModelMain = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                firstnum.setText(integer+"");
+            }
+        });
+        viewModelMain.Vnum2.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                secondnum.setText(integer+"");
+            }
+        });
         initView();
     }
 
@@ -42,34 +57,25 @@ public class MainActivity extends AppCompatActivity {
         chlng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Random r = new Random();
-                num1=r.nextInt(9)+1;
-                num2=r.nextInt(90)+10;
-                firstnum.setText(num1+"");
-                secondnum.setText(num2+"");
-
+               viewModelMain.chalenge();
+               ans.setText("");
             }
+
         });
         x20 = findViewById(R.id.btn20x);
         x20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random r = new Random();
-                num1=r.nextInt(9)+1;
-                num2=r.nextInt(10)+10;
-                firstnum.setText(num1+"");
-                secondnum.setText(num2+"");
+                viewModelMain.x20();
+                ans.setText("");
             }
         });
         mulb = findViewById(R.id.btnmulb);
         mulb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random r = new Random();
-                num1=r.nextInt(10)+1;
-                num2=r.nextInt(10)+1;
-                firstnum.setText(num1+"");
-                secondnum.setText(num2+"");
+               viewModelMain.mulltable();
+                ans.setText("");
             }
         });
         firstnum = findViewById(R.id.firstnum);
@@ -80,14 +86,7 @@ public class MainActivity extends AppCompatActivity {
         chk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = ans.getText().toString();
-                answer = Integer.valueOf(s);
-                if(num2*num1==answer){
-                    Toast.makeText(MainActivity.this, "well done!!!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "maybe next time...:(", Toast.LENGTH_SHORT).show();
-                }
+                    Toast.makeText(MainActivity.this, viewModelMain.answer(ans), Toast.LENGTH_SHORT).show();
             }
         });
         save = findViewById(R.id.save);
