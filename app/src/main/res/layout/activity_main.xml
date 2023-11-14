@@ -39,12 +39,17 @@
         android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:text="Rate"
+        android:layout_height="match_parent"
+        android:layout_marginRight="150dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/rate"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:background="@color/purple_500"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -53,7 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mul bord"
-            android:id="@+id/btnmulb"/>
+            android:id="@+id/btnmulb"
+            android:layout_marginLeft="5dp"/>
+
         <Button
             android:textSize="20sp"
             android:layout_marginLeft="5dp"
@@ -62,7 +69,7 @@
             android:text="20X"
             android:id="@+id/btn20x"/>
         <Button
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
