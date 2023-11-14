@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView firstnum;
     private TextView secondnum;
     private MainViewModel viewModelMain;
+    private TextView user;
+    private TextView score;
 
 
     @Override
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModelMain = new ViewModelProvider(this).get(MainViewModel.class);
+        initView();
+        SetUserDetails();
         viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -47,7 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 secondnum.setText(integer+"");
             }
         });
-        initView();
+        viewModelMain.Score.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                score.setText(integer+"");
+            }
+        });
+
+
     }
 
     private void initView()
@@ -57,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         chlng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               viewModelMain.chalenge();
+               viewModelMain.chalenge(3);
                ans.setText("");
             }
 
@@ -66,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         x20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModelMain.x20();
+                viewModelMain.x20(2);
                 ans.setText("");
             }
         });
@@ -74,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mulb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               viewModelMain.mulltable();
+               viewModelMain.mulltable(1);
                 ans.setText("");
             }
         });
@@ -91,7 +102,14 @@ public class MainActivity extends AppCompatActivity {
         });
         save = findViewById(R.id.save);
         sau = findViewById(R.id.sau);
+        score =findViewById(R.id.score);
+        user = findViewById(R.id.User);
 
+    }
+    public void SetUserDetails(){
+    String userName = getIntent().getStringExtra("UserName");
+    user.setText(("welcome "+userName+"! current score: "));
+    viewModelMain.SetUserDetails(userName);
     }
 
 }

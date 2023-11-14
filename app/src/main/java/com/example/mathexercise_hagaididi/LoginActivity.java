@@ -26,7 +26,9 @@ public class LoginActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            intent.putExtra("UserName", UserName.getText().toString());
+            startActivity(intent);
             }
         });
     }
