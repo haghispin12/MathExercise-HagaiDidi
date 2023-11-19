@@ -3,10 +3,12 @@ package com.example.mathexercise_hagaididi;
 public class User {
     private String UserName;
     private int score;
+    private int rate ;
 
     public User (String UserName){
         this.UserName = UserName;
         score =0;
+        rate =0;
     }
     public void editScore(int Type){
         switch (Type){
@@ -21,6 +23,9 @@ public class User {
                 break;
 
         }
+    }
+    public void setRate(int Rate){
+        rate= Rate;
     }
 
     public int getScore() {

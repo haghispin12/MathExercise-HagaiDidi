@@ -1,13 +1,20 @@
 package com.example.mathexercise_hagaididi;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     int answer;
     private TextView math;
     private Button chlng;
-    private Button x20 ;
-    private Button mulb ;
-    private TextView mul ;
+    private Button x20;
+    private Button mulb;
+    private TextView mul;
     private EditText ans;
     private Button chk;
     private Button save;
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView user;
     private TextView score;
     private Button rate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initView()
-    {
+    private void initView() {
         math = findViewById(R.id.mathe);
         chlng = findViewById(R.id.btnchlng);
         x20 = findViewById(R.id.btn20x);
@@ -56,19 +64,27 @@ public class MainActivity extends AppCompatActivity {
         chk = findViewById(R.id.chk);
         save = findViewById(R.id.save);
         sau = findViewById(R.id.sau);
-        score =findViewById(R.id.score);
+        score = findViewById(R.id.score);
         user = findViewById(R.id.User);
         rate = findViewById(R.id.rate);
 
     }
-    private void SetUserDetails(){
-    String userName = getIntent().getStringExtra("UserName");
-    user.setText(("welcome "+userName+"! current score: "));
-    viewModelMain.SetUserDetails(userName);
+    ActivityResultLauncher <Intent> activityResultLauncher =registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+
+            viewModelMain.setuserRate(result.getData().getIntExtra("progress",-1));
+        }
+    });
+
+    private void SetUserDetails() {
+        String userName = getIntent().getStringExtra("UserName");
+        user.setText(("welcome " + userName + "! current score: "));
+        viewModelMain.SetUserDetails(userName);
 
     }
 
-    public void activity(){
+    public void activity() {
         chlng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,35 +112,39 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, viewModelMain.answer(ans), Toast.LENGTH_SHORT).show();
             }
         });
+
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this,RateActivity.class);
+                activityResultLauncher.launch(intent);
             }
         });
     }
 
-    public void viewModel(){
+    public void viewModel() {
         viewModelMain = new ViewModelProvider(this).get(MainViewModel.class);
         viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                firstnum.setText(integer+"");
+                firstnum.setText(integer + "");
             }
         });
         viewModelMain.Vnum2.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                secondnum.setText(integer+"");
+                secondnum.setText(integer + "");
             }
         });
         viewModelMain.Score.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                score.setText(integer+"");
+                score.setText(integer + "");
             }
         });
 
     }
 
+
 }
+

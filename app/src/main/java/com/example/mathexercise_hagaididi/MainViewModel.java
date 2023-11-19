@@ -39,4 +39,7 @@ public class MainViewModel extends ViewModel {
     public void SetUserDetails(String userName){
         user=new User(userName);
     }
+    public void setuserRate(int rate){
+        user.setRate(rate);
+    }
 }
