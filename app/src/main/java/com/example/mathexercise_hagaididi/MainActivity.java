@@ -6,6 +6,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.Observer;
 
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.Random;
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView user;
     private TextView score;
     private Button rate;
+    private Fragment SAU;
 
 
 
@@ -85,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void activity() {
+        sau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SAU =new fragShowUsers();
+                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                trans.add(R.id.fragShowUsers,new fragShowUsers());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
+        });
         chlng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
