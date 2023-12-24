@@ -31,4 +31,5 @@ public class User {
     public int getScore() {
         return score;
     }
+    public String getUserName(){return UserName;}
 }

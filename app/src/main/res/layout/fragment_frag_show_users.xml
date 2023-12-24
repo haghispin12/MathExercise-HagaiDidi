@@ -4,41 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragShowUsers"
+    android:background="@color/white"
     >
     <LinearLayout
+        android:layout_marginTop="90dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp">
+        android:orientation="vertical"
+        android:gravity="left"
+        >
 
-        <TextView
-            android:id="@+id/fragUser"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="user"
-            android:textSize="30sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="score"
             android:layout_marginLeft="20dp"
-            android:textSize="30sp"
-            android:id="@+id/fragScore"/>
-    </LinearLayout>
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/fragUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="user"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/fragScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:text="score"
+                android:textSize="30sp" />
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:text="add picture"
             android:id="@+id/fragAddPicture"/>
         <ImageView
