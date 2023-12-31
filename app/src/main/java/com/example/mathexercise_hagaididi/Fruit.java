@@ -4,9 +4,9 @@ import android.graphics.drawable.Drawable;
 
 public class Fruit {
     private String name;
-    private Drawable drawable;
+    private int drawable;
 
-    public Fruit(String name, Drawable drawable) {
+    public Fruit(String name, int drawable) {
         this.name = name;
         this.drawable = drawable;
     }
@@ -19,11 +19,11 @@ public class Fruit {
         this.name = name;
     }
 
-    public Drawable getDrawable() {
+    public int getDrawable() {
         return drawable;
     }
 
-    public void setDrawable(Drawable drawable) {
+    public void setDrawable(int drawable) {
         this.drawable = drawable;
     }
 }
