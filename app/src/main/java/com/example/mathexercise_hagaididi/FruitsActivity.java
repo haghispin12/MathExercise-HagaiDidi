@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FruitsActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class FruitsActivity extends AppCompatActivity {
         ArrayList<Fruit> fruits = new ArrayList<>();
         fruits.add(new Fruit("banana",R.drawable.banana));
         fruits.add(new Fruit("apple",R.drawable.apple));
-        fruits.add(new Fruit("fru",R.drawable.fru));
+        fruits.add(new Fruit("fruits",R.drawable.fruits));
         fruits.add(new Fruit("orange",R.drawable.orange));
         fruits.add(new Fruit("grapes",R.drawable.grapes));
         fruits.add(new Fruit("lemon",R.drawable.lemon));

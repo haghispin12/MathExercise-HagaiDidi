@@ -94,8 +94,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,FruitsActivity.class);
                 startActivity(intent);
-              /*  FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+   /*             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
                 trans.add(R.id.fragShowUsers,new fragShowUsers());
+                trans.addToBackStack(null);
                 trans.commit();*/
             }
         });
