@@ -72,8 +72,8 @@ public class fragShowUsers extends Fragment {
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModelMain.getDatabase().insert(viewModelMain.getUser(),null);
-                username.setText(viewModelMain.getUser().getId()+"");
+                viewModelMain.vinsert(requireActivity());
+                username.setText(viewModelMain.getId()+"");
             }
         });
     }
@@ -84,6 +84,7 @@ public class fragShowUsers extends Fragment {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
                         pic.setImageURI(uri);
+                        viewModelMain.seturi(uri);
                     }
                 }
             });

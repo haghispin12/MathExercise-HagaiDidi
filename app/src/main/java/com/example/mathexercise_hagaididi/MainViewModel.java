@@ -1,5 +1,7 @@
 package com.example.mathexercise_hagaididi;
 
+import android.content.Context;
+import android.net.Uri;
 import android.widget.EditText;
 
 import androidx.lifecycle.MutableLiveData;
@@ -9,7 +11,7 @@ public class MainViewModel extends ViewModel {
     private exercise exs = new exercise();
     private User user;
     private int scoreType;
-    private DBHelper database =new DBHelper(null);
+    private DBHelper database;
     MutableLiveData<Integer> Vnum1 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Vnum2 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Score =new MutableLiveData<Integer>();
@@ -45,8 +47,14 @@ public class MainViewModel extends ViewModel {
     }
     public int getScore(){return user.getScore();}
     public String getUsername(){return user.getUserName();}
-    public User getUser(){
-        return user;
+    public long getId(){
+        return user.getId();
     }
-    public DBHelper getDatabase(){return database;}
+    public void vinsert(Context context){
+        database = new DBHelper(context);
+        database.insert(user,context);
+    }
+    public void seturi(Uri uri){
+        user.setUri(uri);
+    }
 }
