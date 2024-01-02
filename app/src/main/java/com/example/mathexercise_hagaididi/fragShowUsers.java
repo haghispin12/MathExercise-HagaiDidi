@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class fragShowUsers extends Fragment {
     private View v;
@@ -68,6 +69,13 @@ public class fragShowUsers extends Fragment {
                 startCamera.launch(cameraIntent);
             }
         });
+        addPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModelMain.getDatabase().insert(viewModelMain.getUser(),null);
+                username.setText(viewModelMain.getUser().getId()+"");
+            }
+        });
     }
     ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -79,4 +87,5 @@ public class fragShowUsers extends Fragment {
                     }
                 }
             });
+
 }

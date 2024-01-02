@@ -9,6 +9,7 @@ public class MainViewModel extends ViewModel {
     private exercise exs = new exercise();
     private User user;
     private int scoreType;
+    private DBHelper database =new DBHelper(null);
     MutableLiveData<Integer> Vnum1 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Vnum2 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Score =new MutableLiveData<Integer>();
@@ -44,4 +45,8 @@ public class MainViewModel extends ViewModel {
     }
     public int getScore(){return user.getScore();}
     public String getUsername(){return user.getUserName();}
+    public User getUser(){
+        return user;
+    }
+    public DBHelper getDatabase(){return database;}
 }
