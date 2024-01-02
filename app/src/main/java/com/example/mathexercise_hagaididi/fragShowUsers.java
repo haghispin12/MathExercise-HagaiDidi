@@ -69,7 +69,7 @@ public class fragShowUsers extends Fragment {
                 startCamera.launch(cameraIntent);
             }
         });
-        addPic.setOnClickListener(new View.OnClickListener() {
+        addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModelMain.getDatabase().insert(viewModelMain.getUser(),null);
