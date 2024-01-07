@@ -13,8 +13,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,8 @@ public class fragShowUsers extends Fragment {
     private Button addUser;
     private ImageView pic;
     private Uri uri;
+    private RecyclerView rcShowUsers;
+    private MyUsersAdapter usersAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,10 +47,15 @@ public class fragShowUsers extends Fragment {
         initViews(v);
         activity();
         setUserDataInFrag();
+        initUsersAdapter();
          return v;
     }
-    public void activateViewModel(){viewModelMain = new ViewModelProvider(getActivity()).get(MainViewModel.class);}
+    public void activateViewModel(){
+        viewModelMain = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+
+    }
     public void initViews(View v){
+        rcShowUsers =v.findViewById(R.id.rcShowUsers);
         username = v.findViewById(R.id.fragUser);
         score = v.findViewById(R.id.fragScore);
         addPic = v.findViewById(R.id.fragAddPicture);
@@ -88,5 +98,16 @@ public class fragShowUsers extends Fragment {
                     }
                 }
             });
+    public void initUsersAdapter(){
+        usersAdapter = new MyUsersAdapter(viewModelMain.selectAll(requireActivity()), new MyUsersAdapter.OnItemClickListener() {
+            @Override
+            public void onitemClick(User item) {
+
+            }
+        });
+        rcShowUsers.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        rcShowUsers.setAdapter(usersAdapter);
+        rcShowUsers.setHasFixedSize(true);
+    }
 
 }

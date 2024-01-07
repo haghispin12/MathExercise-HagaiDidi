@@ -1,3 +1,4 @@
+/*
 package com.example.mathexercise_hagaididi;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,4 +34,5 @@ public class FruitsActivity extends AppCompatActivity {
          rcShowUsers.setAdapter(myFruitsAdapter);
          rcShowUsers.setHasFixedSize(true);
     }
-}
+*/
+//}

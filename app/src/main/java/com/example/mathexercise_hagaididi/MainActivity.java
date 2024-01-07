@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -155,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Integer integer) {
                 score.setText(integer + "");
+            }
+        });
+        viewModelMain.users.observe(this, new Observer<ArrayList<User>>() {
+            @Override
+            public void onChanged(ArrayList<User> users) {
+                Toast.makeText(MainActivity.this,users.get(0).getUserName(),Toast.LENGTH_SHORT).show();
+
             }
         });
 

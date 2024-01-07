@@ -59,6 +59,11 @@
             android:layout_marginLeft="162dp"
             android:text="add user"
             android:id="@+id/fragAddUser"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcShowUsers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
     </LinearLayout>
 
 </FrameLayout>
