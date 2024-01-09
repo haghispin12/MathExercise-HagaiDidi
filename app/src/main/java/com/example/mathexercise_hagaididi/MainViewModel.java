@@ -7,6 +7,8 @@ import android.widget.EditText;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class MainViewModel extends ViewModel {
     private exercise exs = new exercise();
     private User user;
@@ -15,6 +17,7 @@ public class MainViewModel extends ViewModel {
     MutableLiveData<Integer> Vnum1 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Vnum2 =new MutableLiveData<Integer>();
     MutableLiveData<Integer> Score =new MutableLiveData<Integer>();
+    MutableLiveData<ArrayList<User>> users =new MutableLiveData<ArrayList<User>>();
     public void mulltable(int Type){
         scoreType=Type;
         Vnum1.setValue(exs.mulb());
@@ -46,6 +49,9 @@ public class MainViewModel extends ViewModel {
         user.setRate(rate);
     }
     public int getScore(){return user.getScore();}
+    public  int getRate(){
+        return user.getRate();
+    }
     public String getUsername(){return user.getUserName();}
     public long getId(){
         return user.getId();
@@ -57,4 +63,21 @@ public class MainViewModel extends ViewModel {
     public void seturi(Uri uri){
         user.setUri(uri);
     }
+    public ArrayList<User> selectAll(Context context){
+        database = new DBHelper(context);
+       ArrayList<User> users =database.selectAll();
+         this.users.setValue(users);
+         return users;
+    }
+    public boolean checkIfNotExists(String Username){
+        for(int i = 0 ;i<users.getValue().size();i++){
+            if(users.getValue().get(i).getUserName().equals(user.getUserName())){
+                user.setId(users.getValue().get(i).getId());
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 }

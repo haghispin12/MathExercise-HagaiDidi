@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class fragShowUsers extends Fragment {
     private View v;
     private MainViewModel viewModelMain;
@@ -37,6 +40,7 @@ public class fragShowUsers extends Fragment {
     private Uri uri;
     private RecyclerView rcShowUsers;
     private MyUsersAdapter usersAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +56,12 @@ public class fragShowUsers extends Fragment {
     }
     public void activateViewModel(){
         viewModelMain = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+        viewModelMain.users.observe(requireActivity(), new Observer<ArrayList<User>>() {
+            @Override
+            public void onChanged(ArrayList<User> users) {
+
+            }
+        });
 
     }
     public void initViews(View v){
@@ -61,10 +71,12 @@ public class fragShowUsers extends Fragment {
         addPic = v.findViewById(R.id.fragAddPicture);
         addUser = v.findViewById(R.id.fragAddUser);
         pic = v.findViewById(R.id.fragPicture);
+
     }
     public void setUserDataInFrag(){
-        username.setText(viewModelMain.getUsername()+"");
-        score.setText(viewModelMain.getScore()+"");
+        username.setText(viewModelMain.getUsername()+"  ");
+        score.setText(",score:"+viewModelMain.getScore()+"");
+
     }
     public void activity(){
         addPic.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +94,9 @@ public class fragShowUsers extends Fragment {
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModelMain.vinsert(requireActivity());
-                username.setText(viewModelMain.getId()+"");
+                if (viewModelMain.checkIfNotExists(viewModelMain.getUsername())) {
+                    viewModelMain.vinsert(requireActivity());
+                }
             }
         });
     }
@@ -109,5 +122,6 @@ public class fragShowUsers extends Fragment {
         rcShowUsers.setAdapter(usersAdapter);
         rcShowUsers.setHasFixedSize(true);
     }
+
 
 }

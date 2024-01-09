@@ -158,13 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 score.setText(integer + "");
             }
         });
-        viewModelMain.users.observe(this, new Observer<ArrayList<User>>() {
-            @Override
-            public void onChanged(ArrayList<User> users) {
-                Toast.makeText(MainActivity.this,users.get(0).getUserName(),Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
     }
 

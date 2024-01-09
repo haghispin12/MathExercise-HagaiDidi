@@ -52,9 +52,10 @@ public class MyUsersAdapter extends RecyclerView.Adapter<MyUsersAdapter.MyViewHo
         }
         public void bind(final User item, final OnItemClickListener
                 listener) {
-
-            tvUserName.setText(item.getUserName());
-            ivUserImg.setImageURI(item.getUri());
+            tvRate.setText(item.getRate()+"");
+            tvScore.setText(item.getScore()+"");
+            tvUserName.setText(item.getUserName()+"");
+            ivUserImg.setImageBitmap(item.getBitmap());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                 listener.onitemClick(item);
