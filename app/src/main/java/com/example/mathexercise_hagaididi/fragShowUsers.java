@@ -18,14 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,11 +45,11 @@ public class fragShowUsers extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          v=inflater.inflate(R.layout.fragment_frag_show_users, container, false);
-        activateViewModel();
         initViews(v);
+         activateViewModel();
         activity();
         setUserDataInFrag();
-        initUsersAdapter();
+        viewModelMain.selectAll(requireActivity());
          return v;
     }
     public void activateViewModel(){
@@ -59,7 +57,9 @@ public class fragShowUsers extends Fragment {
         viewModelMain.users.observe(requireActivity(), new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
-
+                if (users!=null && users.size()>0) {
+                    initUsersAdapter(users);
+                }
             }
         });
 
@@ -111,8 +111,8 @@ public class fragShowUsers extends Fragment {
                     }
                 }
             });
-    public void initUsersAdapter(){
-        usersAdapter = new MyUsersAdapter(viewModelMain.selectAll(requireActivity()), new MyUsersAdapter.OnItemClickListener() {
+    public void initUsersAdapter(ArrayList<User> users){
+        usersAdapter = new MyUsersAdapter(users, new MyUsersAdapter.OnItemClickListener() {
             @Override
             public void onitemClick(User item) {
 
