@@ -1,5 +1,6 @@
 package com.example.mathexercise_hagaididi;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,13 @@ public class MyUsersAdapter extends RecyclerView.Adapter<MyUsersAdapter.MyViewHo
             tvRate.setText(item.getRate()+"");
             tvScore.setText(item.getScore()+"");
             tvUserName.setText(item.getUserName()+"");
-            ivUserImg.setImageBitmap(item.getBitmap());
+            Bitmap bitmap = item.getBitmap();
+            if(bitmap==null){
+                ivUserImg.setImageResource(R.drawable.usericon);
+            }
+            else {
+                ivUserImg.setImageBitmap(item.getBitmap());
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                 listener.onitemClick(item);

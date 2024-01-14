@@ -185,9 +185,11 @@ public class DBHelper extends SQLiteOpenHelper {
 //    }
 
     public static byte[] getBytes(Context context, Uri uri) throws IOException {
-        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(),uri);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        if (uri!=null) {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        }
         return stream.toByteArray();
     }
 //

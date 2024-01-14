@@ -59,14 +59,15 @@ public class MainViewModel extends ViewModel {
     public void vinsert(Context context){
         database = new DBHelper(context);
         user.setId(database.insert(user,context));
+        selectAll(context);
     }
     public void seturi(Uri uri){
         user.setUri(uri);
     }
-    public ArrayList<User> selectAll(Context context){
+    public void selectAll(Context context){
         database = new DBHelper(context);
-        users.setValue(database.selectAll());
-         return users.getValue();
+       ArrayList<User> users = database.selectAll();
+         this.users.setValue(users);
     }
     public boolean checkIfNotExists(String Username){
         for(int i = 0 ;i<users.getValue().size();i++){
