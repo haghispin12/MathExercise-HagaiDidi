@@ -2,6 +2,7 @@ package com.example.mathexercise_hagaididi;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,11 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,7 +45,14 @@ public class fragShowUsers extends Fragment {
     private Uri uri;
     private RecyclerView rcShowUsers;
     private MyUsersAdapter usersAdapter;
+    private MenuItem  itemDelete;
+    private MenuItem  itemEdit;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +64,7 @@ public class fragShowUsers extends Fragment {
         activity();
         setUserDataInFrag();
         viewModelMain.selectAll(requireActivity());
+
          return v;
     }
     public void activateViewModel(){
@@ -115,6 +130,9 @@ public class fragShowUsers extends Fragment {
         usersAdapter = new MyUsersAdapter(users, new MyUsersAdapter.OnItemClickListener() {
             @Override
             public void onitemClick(User item) {
+                itemDelete.setVisible(true);
+                itemEdit.setVisible(true);
+
 
             }
         });
@@ -123,5 +141,25 @@ public class fragShowUsers extends Fragment {
         rcShowUsers.setHasFixedSize(true);
     }
 
+    public void  onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.main_menu,menu);
+        itemDelete = menu.findItem(R.id.delete);
+        itemDelete.setVisible(false);
+        itemEdit = menu.findItem(R.id.edit);
+        itemEdit.setVisible(false);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+        switch (id){
+            case R.id.delete:
+
+                return  true;
+            case R.id.edit:
+                return true;
+        }
+        return false;
+    }
 }
