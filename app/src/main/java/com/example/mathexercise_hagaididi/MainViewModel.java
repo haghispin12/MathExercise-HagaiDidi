@@ -79,16 +79,17 @@ public class MainViewModel extends ViewModel {
         return true;
 
     }
-    public void update(Context context){
-        DBHelper db =new DBHelper(context);
-        db.update(user);
+    public void update(Context context,User user){
+        database = new DBHelper(context);
+        database.update(user);
         selectAll(context);
     }
-    public void vDelete(Context context,int id){
+    public void vDelete(Context context,long id){
         database = new DBHelper(context);
         database.deleteById(id);
         selectAll(context);
     }
+
 
 
 }

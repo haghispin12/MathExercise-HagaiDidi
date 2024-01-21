@@ -47,6 +47,7 @@ public class fragShowUsers extends Fragment {
     private MyUsersAdapter usersAdapter;
     private MenuItem  itemDelete;
     private MenuItem  itemEdit;
+    private  User selectedUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,8 +110,13 @@ public class fragShowUsers extends Fragment {
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewModelMain.checkIfNotExists(viewModelMain.getUsername())) {
-                    viewModelMain.vinsert(requireActivity());
+                if(addUser.getText().equals("add user")) {
+                    if (viewModelMain.checkIfNotExists(viewModelMain.getUsername())) {
+                        viewModelMain.vinsert(requireActivity());
+                    }
+                }
+                else{
+                    viewModelMain.update(requireActivity(),selectedUser);
                 }
             }
         });
@@ -132,7 +138,7 @@ public class fragShowUsers extends Fragment {
             public void onitemClick(User item) {
                 itemDelete.setVisible(true);
                 itemEdit.setVisible(true);
-
+                selectedUser = item;
 
             }
         });
@@ -153,11 +159,20 @@ public class fragShowUsers extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.delete:
-
-                return  true;
+                viewModelMain.vDelete(requireActivity(), selectedUser.getId());
+                return true;
             case R.id.edit:
+                username.setText(selectedUser.getUserName() + "");
+                score.setText(selectedUser.getScore() + "");
+                if (selectedUser.getBitmap() == null) {
+                    pic.setImageResource(R.drawable.usericon);
+                }
+                else{
+                    pic.setImageBitmap(selectedUser.getBitmap());
+                 }
+                addUser.setText("update");
                 return true;
         }
         return false;
