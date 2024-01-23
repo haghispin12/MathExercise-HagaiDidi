@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class fragShowUsers extends Fragment {
     private MenuItem  itemDelete;
     private MenuItem  itemEdit;
     private  User selectedUser;
+    private EditText editName;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class fragShowUsers extends Fragment {
         viewModelMain.users.observe(requireActivity(), new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
-                if (users!=null && users.size()>0) {
+                if (users!=null) {
                     initUsersAdapter(users);
                 }
             }
@@ -87,6 +89,7 @@ public class fragShowUsers extends Fragment {
         addPic = v.findViewById(R.id.fragAddPicture);
         addUser = v.findViewById(R.id.fragAddUser);
         pic = v.findViewById(R.id.fragPicture);
+        editName = v.findViewById(R.id.editName);
 
     }
     public void setUserDataInFrag(){
@@ -116,6 +119,7 @@ public class fragShowUsers extends Fragment {
                     }
                 }
                 else{
+                    selectedUser.setUserName(editName.getText() + "");
                     viewModelMain.update(requireActivity(),selectedUser);
                 }
             }
@@ -161,9 +165,13 @@ public class fragShowUsers extends Fragment {
         int id=item.getItemId();
         switch (id) {
             case R.id.delete:
+                itemDelete.setVisible(false);
+                itemEdit.setVisible(false);
                 viewModelMain.vDelete(requireActivity(), selectedUser.getId());
                 return true;
             case R.id.edit:
+                itemDelete.setVisible(false);
+                itemEdit.setVisible(false);
                 username.setText(selectedUser.getUserName() + "");
                 score.setText(selectedUser.getScore() + "");
                 if (selectedUser.getBitmap() == null) {
@@ -173,6 +181,8 @@ public class fragShowUsers extends Fragment {
                     pic.setImageBitmap(selectedUser.getBitmap());
                  }
                 addUser.setText("update");
+                username.setVisibility(View.GONE);
+                editName.setVisibility(View.VISIBLE);
                 return true;
         }
         return false;

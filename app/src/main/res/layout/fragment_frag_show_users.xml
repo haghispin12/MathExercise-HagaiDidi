@@ -21,6 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/editName"/>
             <TextView
                 android:id="@+id/fragScore"
                 android:layout_width="wrap_content"
