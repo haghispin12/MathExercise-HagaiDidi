@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import android.graphics.drawable.Drawable;
 
@@ -27,3 +28,4 @@ public class Fruit {
         this.drawable = drawable;
     }
 }
+*/

@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mathexercise_hagaididi.R;
 
 import java.util.ArrayList;
 
@@ -71,3 +74,4 @@ public class MyUsersAdapter extends RecyclerView.Adapter<MyUsersAdapter.MyViewHo
         }
     }//end inner class
 }
+*/

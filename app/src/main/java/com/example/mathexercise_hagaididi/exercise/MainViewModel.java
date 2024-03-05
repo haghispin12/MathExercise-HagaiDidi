@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import android.content.Context;
 import android.net.Uri;
@@ -93,3 +94,4 @@ public class MainViewModel extends ViewModel {
 
 
 }
+*/

@@ -1,9 +1,9 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,13 +16,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import java.util.ArrayList;
-import java.util.Random;
+import com.example.mathexercise_hagaididi.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
         sau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent intent = new Intent(MainActivity.this,FruitsActivity.class);
-                startActivity(intent);*/
+             */
+/*   Intent intent = new Intent(MainActivity.this,FruitsActivity.class);
+                startActivity(intent);*//*
+
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
                 trans.add(R.id.fragShowUsers,new fragShowUsers());
                 trans.addToBackStack(null);
@@ -164,3 +164,4 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
+*/

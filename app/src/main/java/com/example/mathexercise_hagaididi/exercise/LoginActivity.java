@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.mathexercise_hagaididi.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText UserName;
@@ -40,4 +43,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-}
+}*/

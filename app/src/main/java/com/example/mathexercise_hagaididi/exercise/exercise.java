@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,3 +57,4 @@ public class exercise {
         return "maybe next time...:(";
     }
 }
+*/

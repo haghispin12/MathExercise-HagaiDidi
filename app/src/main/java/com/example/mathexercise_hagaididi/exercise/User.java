@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -91,3 +92,4 @@ public class User {
         Id = id;
     }
 }
+*/

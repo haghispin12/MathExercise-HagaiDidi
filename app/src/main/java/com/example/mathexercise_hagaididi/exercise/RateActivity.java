@@ -1,4 +1,5 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import com.example.mathexercise_hagaididi.R;
 
 public class RateActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
     private Button subRateBtn;
@@ -50,3 +53,4 @@ public class RateActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         Toast.makeText(this,"seek bar new value is:"+rateProgres,Toast.LENGTH_SHORT).show();
     }
 }
+*/

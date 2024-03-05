@@ -1,8 +1,8 @@
-package com.example.mathexercise_hagaididi;
+/*
+package com.example.mathexercise_hagaididi.exercise;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
@@ -31,7 +31,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.mathexercise_hagaididi.R;
 
 import java.util.ArrayList;
 
@@ -187,4 +188,4 @@ public class fragShowUsers extends Fragment {
         }
         return false;
     }
-}
+}*/
