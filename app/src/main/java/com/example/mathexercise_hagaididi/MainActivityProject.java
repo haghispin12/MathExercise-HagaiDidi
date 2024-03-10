@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class MainActivityProject extends AppCompatActivity {
         a1.add(m1);
         a1.add(m2);
         initmissionAdapter(a1);
+        Activity();
     }
     public void initviews(){
         rc =findViewById(R.id.rcView);
@@ -45,5 +48,14 @@ public class MainActivityProject extends AppCompatActivity {
         rc.setLayoutManager(new LinearLayoutManager(this));
         rc.setAdapter(Adapter);
         rc.setHasFixedSize(true);
+    }
+    public void Activity(){
+        addMission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityProject.this,addmission.class);
+                startActivity(intent);
+            }
+        });
     }
 }
