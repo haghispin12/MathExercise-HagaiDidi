@@ -29,6 +29,8 @@ private EditText explanation;
 private LinearLayout empty;
 private CalendarView calender;
 private FrameLayout calenderFrame;
+private String selectedDate;
+
 
     String[] bankMissions={"mission type","normal","by days","continual"};
     @Override
@@ -63,7 +65,7 @@ private FrameLayout calenderFrame;
 
     }
     public void initviews(){
-        spin =(Spinner) findViewById(R.id.spinner);
+        spin = findViewById(R.id.spinner);
         createYourMission =findViewById(R.id.createYourMission);
         normal = findViewById(R.id.normal);
         missionName =findViewById(R.id.missionName);
@@ -71,22 +73,29 @@ private FrameLayout calenderFrame;
         date = findViewById(R.id.date);
         explanation = findViewById(R.id.explanation);
         empty = findViewById(R.id.empty);
-        calender = (CalendarView) findViewById(R.id.calendar);
+        calender = findViewById(R.id.calendar);
         calenderFrame = findViewById(R.id.calendarFrame);
     }
     public void activity(){
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calenderFrame.setVisibility(View.VISIBLE);
+                if(date.getText().equals("confirm")){
+                    calenderFrame.setVisibility(View.GONE);
+                    date.setText(selectedDate+"");
+                }
+                else {
+                    calenderFrame.setVisibility(View.VISIBLE);
+                    date.setText("confirm");
+                }
             }
 
         });
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                // display the selected date by using a toast
                 Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+                selectedDate = dayOfMonth + "/" + month + "/" + year;
             }
         });
     }
