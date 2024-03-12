@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="create your mission"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -69,18 +69,23 @@
                 android:layout_height="wrap_content"
                 android:hint="hour"
                 android:id="@+id/hour" />
-
-            <CalendarView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </CalendarView>
         </LinearLayout>
-
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/calendarFrame">
+        <CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/calendar"
+            >
+        </CalendarView>
+    </FrameLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/empty"
         android:orientation="horizontal"></LinearLayout>
 

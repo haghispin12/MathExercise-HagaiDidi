@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,6 +27,8 @@ private EditText Hour;
 private Button date;
 private EditText explanation;
 private LinearLayout empty;
+private CalendarView calender;
+private FrameLayout calenderFrame;
 
     String[] bankMissions={"mission type","normal","by days","continual"};
     @Override
@@ -66,17 +71,23 @@ private LinearLayout empty;
         date = findViewById(R.id.date);
         explanation = findViewById(R.id.explanation);
         empty = findViewById(R.id.empty);
+        calender = (CalendarView) findViewById(R.id.calendar);
+        calenderFrame = findViewById(R.id.calendarFrame);
     }
     public void activity(){
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
-                ComponentName  cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
-                i.setComponent(cn);
-                startActivity(i);
+                calenderFrame.setVisibility(View.VISIBLE);
+            }
+
+        });
+        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                // display the selected date by using a toast
+                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
             }
         });
-
     }
 }
