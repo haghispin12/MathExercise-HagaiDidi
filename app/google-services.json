@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "623916514467",
+    "project_id": "hagai-s-project",
+    "storage_bucket": "hagai-s-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623916514467:android:29dd48827338325838d316",
+        "android_client_info": {
+          "package_name": "com.example.mathexercise_hagaididi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh5HcvecHP_YAYpj7sxu6E2con0eB8lMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
