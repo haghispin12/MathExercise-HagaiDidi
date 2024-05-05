@@ -17,26 +17,25 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
 
-        private static final String DATABASENAME = "user.db";
-        private static final String TABLE_RECORD = "tblusers";
+        private static final String DATABASENAME = "missions.db";
+        private static final String TABLE_RECORD = "tblmissions";
         private static final int DATABASEVERSION = 1;
         // ?
         private static final String COLUMN_ID = "_id";
-        private static final String COLUMN_SCORE = "score";
+        private static final String COLUMN_PERCENTAGE = "percentage";
         private static final String COLUMN_NAME = "name";
-        //private static final String COLUMN_PASSWORD = "password";
-        private static final String COLUMN_RATE = "rate";
-        private static final String COLUMN_PICTURE = "image";
+        private static final String COLUMN_PRIORITY = "priority";
 
-        private static final String[] allColumns = {COLUMN_ID, COLUMN_NAME, COLUMN_RATE,COLUMN_PICTURE,COLUMN_SCORE};
+
+        private static final String[] allColumns = {COLUMN_ID, COLUMN_NAME, COLUMN_PRIORITY,COLUMN_PERCENTAGE};
 
         private static final String CREATE_TABLE_USER = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_RECORD + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_NAME + " TEXT UNIQUE," +
-                COLUMN_SCORE + " INT," +
-                COLUMN_RATE + " INT," +
-                COLUMN_PICTURE + " BLOB );";
+                COLUMN_PERCENTAGE + " INT," +
+                COLUMN_PRIORITY + " TEXT );";
+
 
         private SQLiteDatabase database; // access to table
 
@@ -63,38 +62,28 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // get the user back with the id
         // also possible to return only the id
-        public long insert(User user,Context context){
+        public long insert(mission mission,Context context){
             database = getWritableDatabase(); // get access to write the database
             ContentValues values = new ContentValues();
-            values.put(COLUMN_NAME, user.getUserName());
-            values.put(COLUMN_RATE, user.getRate());
-            values.put(COLUMN_SCORE, user.getScore());
+            values.put(COLUMN_NAME, mission.getName());
+            values.put(COLUMN_PERCENTAGE, mission.getPercentage());
+            values.put(COLUMN_PRIORITY, mission.getPriority());
 
             // stored as Binary Large OBject ->  BLOB
-            try {
-                values.put(COLUMN_PICTURE, getBytes(context,user.getUri()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
 
             long id = database.insert(TABLE_RECORD, null, values);
-            user.setId(id);
+            mission.setId(id);
             database.close();
             return id;
         }
 
         // remove a specific user from the table
-        public void deleteUser(User user)
+        public void deleteUser(mission mission)
         {
 
         }
-        private  byte[] getBytes(Bitmap bitmap) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if(bitmap!=null) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            }
-            return stream.toByteArray();
-        }
+
 
         public void deleteById(long id )
         {
@@ -104,36 +93,34 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         // update a specific user
-        public void update(User user)
+        public void update(mission mission)
         {
             database = getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(COLUMN_ID, user.getId());
-            values.put(COLUMN_NAME, user.getUserName());
-            values.put(COLUMN_RATE, user.getRate());
-            // stored as Binary Large OBject ->  BLOB
-            values.put(COLUMN_PICTURE, getBytes(user.getBitmap()));
-            database.update(TABLE_RECORD, values, COLUMN_ID + "=" + user.getId(), null);
+            values.put(COLUMN_ID, mission.getId());
+            values.put(COLUMN_NAME, mission.getName());
+            values.put(COLUMN_PERCENTAGE, mission.getPercentage());
+            values.put(COLUMN_PRIORITY, mission.getPriority());
+            database.update(TABLE_RECORD, values, COLUMN_ID + "=" + mission.getId(), null);
             database.close();
 
         }
 
         // return all rows in table
-        public ArrayList<User> selectAll(){
+        public ArrayList<mission> selectAll(){
             database = getReadableDatabase(); // get access to read the database
-            ArrayList<User> users = new ArrayList<>();
+            ArrayList<mission> users = new ArrayList<>();
             Cursor cursor = database.query(TABLE_RECORD, allColumns, null, null, null, null, null); // cursor points at a certain row
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-                    int rating = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RATE));
-                    int score = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SCORE));
-                    byte[] bytes = cursor.getBlob(cursor.getColumnIndexOrThrow(COLUMN_PICTURE));
+                    int percentage = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PERCENTAGE));
+                    String priority = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PRIORITY));
 
-                    Bitmap bitmap = getImage(bytes);
+
                     long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
-                    User user= new User(name,score,rating,id,bitmap);
-                    users.add(user);
+                    mission mission= new mission(name,percentage,priority,id);
+                    users.add(mission);
                 }
             }
             cursor.close();
@@ -144,9 +131,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //I prefer using this one...
         //
-        public ArrayList<User> genericSelectByUserName(String userName)
+        public ArrayList<mission> genericSelectByUserName(String Name)
         {
-            String[] vals = { userName };
+            String[] vals = { Name };
             // if using the rawQuery
             // String query = "SELECT * FROM " + TABLE_RECORD + " WHERE " + COLUMN_NAME + " = ?";
             String column = COLUMN_NAME;
@@ -157,10 +144,10 @@ public class DBHelper extends SQLiteOpenHelper {
         //INPUT: notice two options rawQuery should look like
         // rawQuery("SELECT id, name FROM people WHERE name = ? AND id = ?", new String[] {"David", "2"});
         //OUTPUT: arraylist - number of elements accordingly
-        public ArrayList<User> select(String column,String[] values)
+        public ArrayList<mission> select(String column,String[] values)
         {
             database = getReadableDatabase(); // get access to read the database
-            ArrayList<User> users = new ArrayList<>();
+            ArrayList<mission> missions = new ArrayList<>();
             // Two options,
             // since query cannot be created in compile time there is no difference
             //Cursor cursor = database.rawQuery(query, values);
@@ -168,34 +155,15 @@ public class DBHelper extends SQLiteOpenHelper {
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-                    int rating = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RATE));
-                    byte[] bytes = cursor.getBlob(cursor.getColumnIndexOrThrow(COLUMN_PICTURE));
-                    int score = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SCORE));
-                    Bitmap bitmap = getImage(bytes);
+                    int percentage = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PERCENTAGE));
+                    String  priority= cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PRIORITY));
                     long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
-                    User user= new User(name,score,rating,id,bitmap);
-                    users.add(user);
+                    mission mission= new mission(name,percentage,priority,id);
+                    missions.add(mission);
                 }// end while
             } // end if
             database.close();
-            return users;
+            return missions;
         }
 
-        public static byte[] getBytes(Context context, Uri uri) throws IOException {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if (uri!=null) {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            }
-            return stream.toByteArray();
-        }
-//
-//
-//    // convert from bitmap to byte array
-
-        //
-//    // convert from byte array to bitmap
-        private  Bitmap getImage(byte[] image) {
-            return BitmapFactory.decodeByteArray(image, 0, image.length);
-        }
 }

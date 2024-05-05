@@ -25,8 +25,8 @@ public class MainActivityProject extends AppCompatActivity {
         setContentView(R.layout.activity_main_project);
         initviews();
         ArrayList<mission> a1 =new ArrayList<mission>();
-        mission m1 = new mission("math",32);
-        mission m2 = new mission("buy a car",62);
+        mission m1 = new mission("math",32,"sdf");
+        mission m2 = new mission("buy a car",62,"qwe");
         a1.add(m1);
         a1.add(m2);
         initmissionAdapter(a1);

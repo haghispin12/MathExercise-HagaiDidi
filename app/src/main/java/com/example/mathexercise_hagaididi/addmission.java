@@ -2,9 +2,6 @@ package com.example.mathexercise_hagaididi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,8 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class addmission extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
-private Spinner spin;
+private Spinner spinMissionType;
 private TextView createYourMission;
+private Spinner spinPriority;
 private LinearLayout normal;
 private EditText missionName;
 private EditText Hour;
@@ -30,19 +28,17 @@ private LinearLayout empty;
 private CalendarView calender;
 private FrameLayout calenderFrame;
 private String selectedDate;
+private String priority;
 
 
     String[] bankMissions={"mission type","normal","by days","continual"};
+    String[] bankPriority ={"priority","urgent","important","casual"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addmission);
         initviews();
-        spin.setOnItemSelectedListener(this);
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,bankMissions);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
-        spin.setSelection(0);
+        spiners();
         activity();
     }
 
@@ -50,12 +46,12 @@ private String selectedDate;
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getApplicationContext(), bankMissions[position], Toast.LENGTH_LONG).show();
         if (bankMissions[position].equals("normal")){
-            normal.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
+            normal.setVisibility(View.VISIBLE);
         }
         else if (bankMissions[position].equals("mission type")){
-            empty.setVisibility(View.VISIBLE);
             normal.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
         }
     }
 
@@ -65,7 +61,7 @@ private String selectedDate;
 
     }
     public void initviews(){
-        spin = findViewById(R.id.spinner);
+        spinMissionType = findViewById(R.id.spinnerMissionType);
         createYourMission =findViewById(R.id.createYourMission);
         normal = findViewById(R.id.normal);
         missionName =findViewById(R.id.missionName);
@@ -75,6 +71,8 @@ private String selectedDate;
         empty = findViewById(R.id.empty);
         calender = findViewById(R.id.calendar);
         calenderFrame = findViewById(R.id.calendarFrame);
+        spinPriority =findViewById(R.id.spinnerPriority);
+
     }
     public void activity(){
         date.setOnClickListener(new View.OnClickListener() {
@@ -98,5 +96,17 @@ private String selectedDate;
                 selectedDate = dayOfMonth + "/" + month + "/" + year;
             }
         });
+    }
+    public void spiners(){
+        spinMissionType.setOnItemSelectedListener(this);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,bankMissions);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinMissionType.setAdapter(aa);
+        spinMissionType.setSelection(0);
+        spinPriority.setOnItemSelectedListener(this);
+        ArrayAdapter bb = new ArrayAdapter(this,android.R.layout.simple_spinner_item,bankPriority);
+        bb.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinPriority.setAdapter(bb);
+        spinPriority.setSelection(0);
     }
 }
