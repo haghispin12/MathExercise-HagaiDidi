@@ -17,13 +17,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class loginActivity extends AppCompatActivity {
-    private Button logInB;
+    private Button submitB;
     private Button signUpB;
     private EditText Email;
     private EditText password;
     private TextView loginT;
-    private TextView signupT;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +35,37 @@ public class loginActivity extends AppCompatActivity {
 
     public void initviews() {
         loginT = findViewById(R.id.textview_login);
-        signupT = findViewById(R.id.textview_signup);
         Email = findViewById(R.id.edittext_email);
         password = findViewById(R.id.edittext_password);
-        logInB = findViewById(R.id.button_login);
+        submitB = findViewById(R.id.button_submit);
         signUpB = findViewById(R.id.button_signup);
 
     }
 
     public void activity() {
-        logInB.setOnClickListener(new View.OnClickListener() {
+        submitB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.signInWithEmailAndPassword(Email.getText().toString(),password.getText().toString()).addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(loginActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(loginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    auth.signInWithEmailAndPassword(Email.getText().toString(), password.getText().toString()).addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(loginActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(loginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+
 
             }
-
+        });
+        signUpB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent = new Intent(loginActivity.this,signupActivity.class);
+            startActivity(intent);
+            }
         });
     }
 }
