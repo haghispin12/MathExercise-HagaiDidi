@@ -8,14 +8,10 @@ public class MainActivityStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_project);
+        setContentView(R.layout.activity_main_student);
         initviews();
-        chooseType();
     }
     public void initviews(){
 
     }
-    public void chooseType(){
-
-        }
     }

@@ -3,12 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentTeacherProfile">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".fragmentTeacherProfile"
+    android:clickable="true"
+    android:background="@color/white"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="your name"
+    android:id="@+id/edittext_teachersname"
+    />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="price"
+        android:id="@+id/editText_price"
+        />
 
+    <EditText
+        android:id="@+id/edittext_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="location" />
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="phone number"
+    android:id="@+id/editText_phonenumber"/>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="confirm"
+    android:id="@+id/button_confirm"/>
+    </LinearLayout>
 </FrameLayout>
