@@ -3,6 +3,7 @@ package com.example.mathexercise_hagaididi;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ public class fragmentTeacherProfile extends Fragment {
         v = inflater.inflate(R.layout.fragment_teacher_profile, container, false);
         mainViewModelTeacher = new ViewModelProvider(requireActivity()).get(MainViewModelTeacher.class);
         initviews();
+        activity();
+        mainViewModelTeacher.isProfileExist();
         return  v;
     }
     public void initviews(){
@@ -35,7 +38,33 @@ public class fragmentTeacherProfile extends Fragment {
         name = v.findViewById(R.id.edittext_teachersname);
     }
     public  void activity(){
-
+        mainViewModelTeacher.isExist.observe(requireActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer==1){
+                    setValues(mainViewModelTeacher.getCurrentTeacher());
+                    mainViewModelTeacher.isExist.setValue(0);
+                }
+                else if(integer==0);
+                else {
+                    mainViewModelTeacher.isExist.setValue(0);
+                }
+            }
+        });
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                teacher teacher = new teacher(phoneNumber.getText().toString(),Integer.valueOf(price.getText().toString()),location.getText().toString(),name.getText().toString(), mainViewModelTeacher.GetCurrentEmail());
+                mainViewModelTeacher.editProfile(teacher);
+                getActivity().getSupportFragmentManager().beginTransaction().remove(fragmentTeacherProfile.this).commit();
+            }
+        });
+    }
+    public void setValues(teacher teacher){
+        phoneNumber.setText(teacher.getPhoneNumber());
+        price.setText(teacher.getPrice()+"");
+        location.setText(teacher.getLocation());
+        name.setText(teacher.getName());
     }
 
 }

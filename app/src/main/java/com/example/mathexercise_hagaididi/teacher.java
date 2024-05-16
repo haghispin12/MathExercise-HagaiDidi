@@ -8,12 +8,14 @@ public class teacher {
     private int price;
     private String location;
     private String name;
+    private String Email;
 
-    public teacher(String phoneNumber, int price, String location, String name) {
+    public teacher(String phoneNumber, int price, String location, String name,String Email) {
         this.phoneNumber = phoneNumber;
         this.price = price;
         this.location = location;
         this.name = name;
+        this.Email = Email;
     }
 
     public String getPhoneNumber() {
@@ -46,5 +48,13 @@ public class teacher {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 }
