@@ -14,7 +14,6 @@ public class MainActivityStudent extends AppCompatActivity {
     private RecyclerView rcTeachers;
     private teachersAdapter teachersAdapter;
     private MainViewModelStudent mainViewModelStudent;
-    private ArrayList<teacher> teachers = new ArrayList<teacher>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +21,6 @@ public class MainActivityStudent extends AppCompatActivity {
         mainViewModelStudent = new ViewModelProvider(this).get(MainViewModelStudent.class);
         initviews();
         activity();
-        mainViewModelStudent.getTeachers();
         mainViewModelStudent.IsHasATeacher();
     }
 

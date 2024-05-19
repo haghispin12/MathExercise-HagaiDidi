@@ -17,17 +17,34 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class MainViewModelTeacher extends ViewModel {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private  teacher currentTeacher;
     MutableLiveData<Integer> isExist =new MutableLiveData<Integer>();
+    MutableLiveData<ArrayList<student>> LiveStudents = new MutableLiveData<>();
 
     public void editProfile(teacher teacher){
         db.collection("teachers profiles").document().set(teacher).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
             }
+        });
+    }
+    public void getStudents() {
+        db.collection("connections").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    ArrayList<student> tempStudents;
+                    if (documentSnapshot.exists()) {
+
+                    }
+                }
+            }
+
         });
     }
     public void connectionsListener(){

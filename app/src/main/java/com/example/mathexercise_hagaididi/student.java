@@ -3,12 +3,20 @@ package com.example.mathexercise_hagaididi;
 public class student {
     private String Email;
     private String name;
-    private String age;
+    private String status;
 
-    public student(String email, String name ,String age) {
+    public student(String email, String name ,String age,String status) {
         Email = email;
         this.name = name;
-        this.age = age;
+        this.status= status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getEmail() {
@@ -27,11 +35,4 @@ public class student {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 }

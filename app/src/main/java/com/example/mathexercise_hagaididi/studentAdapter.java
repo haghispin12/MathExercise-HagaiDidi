@@ -41,17 +41,16 @@ public class studentAdapter extends RecyclerView.Adapter<studentAdapter.MyViewHo
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView textName;
         private TextView yourName;
-        private TextView textAge;
-        private TextView yourAge;
+        private TextView textStatus;
+        private TextView yourStatus;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            textName =itemView.findViewById(R.id.textName);
-            yourName = itemView.findViewById(R.id.yourName);
-            textAge = itemView.findViewById(R.id.textAge);
-            yourName = itemView.findViewById(R.id.yourAge);
-
+            textName =itemView.findViewById(R.id.textNameS);
+            yourName = itemView.findViewById(R.id.yourNameS);
+            textStatus = itemView.findViewById(R.id.textStatus);
+            yourStatus = itemView.findViewById(R.id.yourStatus);
         }
         public void bind(final student item, final studentAdapter.OnItemClickListener
                 listener) {

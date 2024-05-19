@@ -27,7 +27,7 @@ public class MainViewModelStudent extends ViewModel {
     }
 
     public void getTeachers() {
-        FirebaseFirestore.getInstance().collection("teachers profiles").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+       db.collection("teachers profiles").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 ArrayList<teacher> tempTeachers = new ArrayList<teacher>();
