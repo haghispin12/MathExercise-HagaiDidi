@@ -23,6 +23,7 @@ public class MainViewModelTeacher extends ViewModel {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private  teacher currentTeacher;
+    private String string = "string";
     MutableLiveData<Integer> isExist =new MutableLiveData<Integer>();
     MutableLiveData<ArrayList<student>> LiveStudents = new MutableLiveData<>();
 
