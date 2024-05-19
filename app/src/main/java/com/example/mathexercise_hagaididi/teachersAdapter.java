@@ -23,7 +23,7 @@ public class teachersAdapter extends RecyclerView.Adapter<teachersAdapter.MyView
     @NonNull
     @Override
     public teachersAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_teacher,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -64,7 +64,7 @@ public class teachersAdapter extends RecyclerView.Adapter<teachersAdapter.MyView
                 listener) {
             yourName.setText(item.getName());
             yourLocation.setText(item.getLocation());
-            yourPrice.setText(item.getPrice());
+            yourPrice.setText(item.getPrice()+"");
             yourPhoneNumber.setText(item.getPhoneNumber());
 
             itemView.setOnClickListener(new View.OnClickListener() {
