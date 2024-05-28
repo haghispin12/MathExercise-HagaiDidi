@@ -1,5 +1,6 @@
 package com.example.mathexercise_hagaididi;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -48,10 +49,17 @@ public class MainViewModelStudent extends ViewModel {
     }
 
     public void IsHasATeacher() {
-        db.collection("connections").whereEqualTo("email", GetCurrentEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("connections").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
+                for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots){
+                    if(documentSnapshot.exists()){
+                        if(documentSnapshot.getString("emailStudent").equals(GetCurrentEmail())){
+                            return;
+                        }
+                    }
+                }
+                    getTeachers();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -23,7 +24,7 @@ public class MainViewModelTeacher extends ViewModel {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private  teacher currentTeacher;
-    private String string = "string";
+    private student tempStudent;
     MutableLiveData<Integer> isExist =new MutableLiveData<Integer>();
     MutableLiveData<ArrayList<student>> LiveStudents = new MutableLiveData<>();
 
@@ -49,13 +50,17 @@ public class MainViewModelTeacher extends ViewModel {
         });
     }
     public void connectionsListener(){
-        db.collection("connections").whereEqualTo("EmailTeacher",GetCurrentEmail()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        ArrayList<student> temp = new ArrayList<>();
+        db.collection("connections").whereEqualTo("emailTeacher",GetCurrentEmail()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()){
                     switch (dc.getType()){
                         case ADDED:
-
+                            String emailStudent = dc.getDocument().getString("emailStudent");
+                            String Status = dc.getDocument().getString("status");
+                            student temS = new student(emailStudent,Status);
+                            temp.add(temS);
                             break;
                         case MODIFIED:
                             break;
@@ -63,6 +68,7 @@ public class MainViewModelTeacher extends ViewModel {
                             break;
                     }
                 }
+                LiveStudents.setValue(temp);
             }
         });
     }
@@ -97,5 +103,22 @@ public class MainViewModelTeacher extends ViewModel {
     }
     public teacher getCurrentTeacher(){
         return currentTeacher;
+    }
+
+    public void setTempStudent(student tempStudent) {
+        this.tempStudent = tempStudent;
+    }
+
+    public void changeStatus(String status){
+        CollectionReference update = db.collection("connctions");
+        update.whereEqualTo("emailStudent",tempStudent.getEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot dc: queryDocumentSnapshots){
+                    String dcId = dc.getId();
+                    update.document(dcId).update("status",status);
+                }
+            }
+        });
     }
 }

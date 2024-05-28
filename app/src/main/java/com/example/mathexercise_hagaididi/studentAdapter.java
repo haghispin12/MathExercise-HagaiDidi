@@ -54,9 +54,8 @@ public class studentAdapter extends RecyclerView.Adapter<studentAdapter.MyViewHo
         }
         public void bind(final student item, final studentAdapter.OnItemClickListener
                 listener) {
-            yourName.setText(item.getName());
-
-
+            yourName.setText(item.getEmail());
+            yourStatus.setText(item.getStatus());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     listener.onitemClick(item);

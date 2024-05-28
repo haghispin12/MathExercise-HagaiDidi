@@ -25,10 +25,12 @@ private MainViewModelTeacher mainViewModelTeacher;
         setContentView(R.layout.activity_main_teacher);
         mainViewModelTeacher = new ViewModelProvider(this).get(MainViewModelTeacher.class);
         initviews();
+        mainViewModelTeacher.connectionsListener();
         activity();
     }
     public void initviews(){
         yourProfile = findViewById(R.id.button_yourProfile);
+        rcStudents = findViewById(R.id.studentsRecycle);
     }
     public void activity(){
         mainViewModelTeacher.LiveStudents.observe(this, new Observer<ArrayList<student>>() {
@@ -51,7 +53,7 @@ private MainViewModelTeacher mainViewModelTeacher;
         studentAdapter = new studentAdapter(students, new studentAdapter.OnItemClickListener() {
             @Override
             public void onitemClick(student item) {
-
+                mainViewModelTeacher.setTempStudent(item);
             }
 
         });
