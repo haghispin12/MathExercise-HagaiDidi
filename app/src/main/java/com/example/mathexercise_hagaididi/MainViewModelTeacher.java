@@ -105,13 +105,10 @@ public class MainViewModelTeacher extends ViewModel {
         return currentTeacher;
     }
 
-    public void setTempStudent(student tempStudent) {
-        this.tempStudent = tempStudent;
-    }
 
-    public void changeStatus(String status){
-        CollectionReference update = db.collection("connctions");
-        update.whereEqualTo("emailStudent",tempStudent.getEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    public void changeStatus(student student,String status ){
+        CollectionReference update = db.collection("connections");
+        update.whereEqualTo("emailStudent",student.getEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot dc: queryDocumentSnapshots){

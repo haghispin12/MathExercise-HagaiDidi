@@ -25,10 +25,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="recline"
-            android:id="@+id/dai_recline"
+            android:text="refuse"
+            android:id="@+id/dai_refuse"
             android:layout_marginLeft="30dp"/>
 
     </LinearLayout>
+
 
 </LinearLayout>
