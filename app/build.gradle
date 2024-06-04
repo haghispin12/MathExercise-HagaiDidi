@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.mathexercise_hagaididi"
-        minSdk 26
+        minSdk 28
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -30,11 +30,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-firestore:25.0.0'
@@ -48,10 +49,18 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.firebase:firebase-messaging:24.0.0'
-    implementation 'com.google.firebase:firebase-analytics:22.0.0'
+    implementation 'com.google.firebase:firebase-analytics:22.0.1'
     implementation 'com.google.firebase:firebase-messaging-directboot:24.0.0'
     implementation 'com.google.firebase:firebase-auth:23.0.0'
 
+    //stable releases
+//    implementation "androidx.compose.material:material:1.6.7"
+//    implementation "androidx.compose.ui:ui:1.6.7"
+//    //...other dipendencies
+//
+//    //material3 releases
+//    implementation "androidx.compose.material3:material3:1.6.7"
+//    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
 
 
 }

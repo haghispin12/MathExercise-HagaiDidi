@@ -24,6 +24,7 @@ private MainViewModelTeacher mainViewModelTeacher;
 private Button daiActiv;
 private Button daiRefuse;
 private TextView daiStatus;
+private Button showStudents;
 
 
 
@@ -39,12 +40,15 @@ private TextView daiStatus;
     public void initviews(){
         yourProfile = findViewById(R.id.button_yourProfile);
         rcStudents = findViewById(R.id.studentsRecycle);
+        showStudents = findViewById(R.id.button_show_students);
     }
     public void activity(){
         mainViewModelTeacher.LiveStudents.observe(this, new Observer<ArrayList<student>>() {
             @Override
             public void onChanged(ArrayList<student> students) {
-                initUsersAdapter(students);
+                if(rcStudents.getVisibility()==View.VISIBLE) {
+                    initUsersAdapter(students);
+                }
             }
         });
         yourProfile.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,14 @@ private TextView daiStatus;
                 trans.add(R.id.teacherfrag,new fragmentTeacherProfile());
                 trans.addToBackStack(null);
                 trans.commit();
+            }
+        });
+        showStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rcStudents.setVisibility(View.VISIBLE);
+                initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
+
             }
         });
     }
@@ -74,6 +86,7 @@ private TextView daiStatus;
                     @Override
                     public void onClick(View view) {
                         mainViewModelTeacher.changeStatus(item,"Active");
+                        initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
                         dialog.cancel();
                     }
                 });
@@ -81,6 +94,7 @@ private TextView daiStatus;
                     @Override
                     public void onClick(View view) {
                         mainViewModelTeacher.changeStatus(item,"refused");
+                        initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
                         dialog.cancel();
                     }
                 });

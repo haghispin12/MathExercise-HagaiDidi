@@ -63,8 +63,16 @@ public class MainViewModelTeacher extends ViewModel {
                             temp.add(temS);
                             break;
                         case MODIFIED:
+                            String emailStudent1 = dc.getDocument().getString("emailStudent");
+                            String Status1 = dc.getDocument().getString("status");
+                            student temS1 = new student(emailStudent1,Status1);
+                            temp.add(temS1);
                             break;
                         case REMOVED:
+                            String emailStudent2 = dc.getDocument().getString("emailStudent");
+                            String Status2 = dc.getDocument().getString("status");
+                            student temS2 = new student(emailStudent2,Status2);
+                            temp.add(temS2);
                             break;
                     }
                 }

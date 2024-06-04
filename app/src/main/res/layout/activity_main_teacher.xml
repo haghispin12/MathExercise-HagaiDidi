@@ -12,16 +12,68 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityTeacher"
     android:orientation="vertical">
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="120dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:text="your profile"
         android:id="@+id/button_yourProfile"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="appoint new lessons"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="show lessons"
+            android:id="@+id/button_show_lessons"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="show students"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/button_show_students"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/studentsRecycle"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lessonsRecycle"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
