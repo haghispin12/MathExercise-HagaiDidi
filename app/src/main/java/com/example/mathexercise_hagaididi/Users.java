@@ -10,19 +10,15 @@ public class Users {
         Email = email;
         Type = type;
     }
-
     public String getEmail() {
         return Email;
     }
-
     public void setEmail(String email) {
         Email = email;
     }
-
     public String getType() {
         return Type;
     }
-
     public void setType(String type) {
         Type = type;
     }

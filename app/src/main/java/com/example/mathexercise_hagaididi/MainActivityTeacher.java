@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivityTeacher extends AppCompatActivity {
+public class MainActivityTeacher extends AppCompatActivity  {
 private Button yourProfile;
 private studentAdapter studentAdapter;
 private RecyclerView rcStudents;
@@ -25,6 +25,8 @@ private Button daiActiv;
 private Button daiRefuse;
 private TextView daiStatus;
 private Button showStudents;
+private Button showLessons;
+private Button appointNewLessons;
 
 
 
@@ -41,6 +43,8 @@ private Button showStudents;
         yourProfile = findViewById(R.id.button_yourProfile);
         rcStudents = findViewById(R.id.studentsRecycle);
         showStudents = findViewById(R.id.button_show_students);
+        appointNewLessons = findViewById(R.id.appointNewLesson);
+        showLessons = findViewById(R.id.button_show_lessons);
     }
     public void activity(){
         mainViewModelTeacher.LiveStudents.observe(this, new Observer<ArrayList<student>>() {
@@ -66,6 +70,15 @@ private Button showStudents;
                 rcStudents.setVisibility(View.VISIBLE);
                 initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
 
+            }
+        });
+        appointNewLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                trans.add(R.id.teacherfrag,new fragmentTeacherLessons());
+                trans.addToBackStack(null);
+                trans.commit();
             }
         });
     }
@@ -108,4 +121,5 @@ private Button showStudents;
         rcStudents.setHasFixedSize(true);
 
     }
+
 }

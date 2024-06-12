@@ -37,7 +37,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="appoint new lessons"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:id="@+id/appointNewLesson"/>
 
     </LinearLayout>
     <LinearLayout

@@ -8,22 +8,16 @@ public class student {
         Email = email;
         this.status= status;
     }
-
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     public String getEmail() {
         return Email;
     }
-
     public void setEmail(String email) {
         Email = email;
     }
-
-
 }
