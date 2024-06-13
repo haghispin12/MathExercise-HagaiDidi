@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +28,11 @@ public class fragmentTeacherLessons extends Fragment {
     private TextView selectedDate;
     private com.applandeo.materialcalendarview.CalendarView cal;
     private View v;
+    private MainViewModelTeacher mainViewModelTeacher;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     v=inflater.inflate(R.layout.fragment_teacher_lessons, container, false);
+        mainViewModelTeacher = new ViewModelProvider(requireActivity()).get(MainViewModelTeacher.class);
         initviews();
         activitis();
     return v;
@@ -56,13 +59,15 @@ public class fragmentTeacherLessons extends Fragment {
         addLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                lesson lesson = new lesson(selectedDate.getText().toString(),selectHour.getText().toString(),mainViewModelTeacher.GetCurrentEmail(),null);
+                mainViewModelTeacher.addLesson(lesson);
+                getActivity().getSupportFragmentManager().beginTransaction().remove(fragmentTeacherLessons.this).commit();
             }
         });
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getParentFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().beginTransaction().remove(fragmentTeacherLessons.this).commit();
             }
         });
     }

@@ -27,7 +27,8 @@ private TextView daiStatus;
 private Button showStudents;
 private Button showLessons;
 private Button appointNewLessons;
-
+private lessonsAdapter LessonsAdapter;
+private RecyclerView rcLessons;
 
 
     @Override
@@ -37,6 +38,7 @@ private Button appointNewLessons;
         mainViewModelTeacher = new ViewModelProvider(this).get(MainViewModelTeacher.class);
         initviews();
         mainViewModelTeacher.connectionsListener();
+        mainViewModelTeacher.lessonsListener();
         activity();
     }
     public void initviews(){
@@ -45,6 +47,7 @@ private Button appointNewLessons;
         showStudents = findViewById(R.id.button_show_students);
         appointNewLessons = findViewById(R.id.appointNewLesson);
         showLessons = findViewById(R.id.button_show_lessons);
+        rcLessons = findViewById(R.id.lessonsRecycle);
     }
     public void activity(){
         mainViewModelTeacher.LiveStudents.observe(this, new Observer<ArrayList<student>>() {
@@ -54,6 +57,15 @@ private Button appointNewLessons;
                     initUsersAdapter(students);
                 }
             }
+        });
+        mainViewModelTeacher.LiveLessons.observe(this, new Observer<ArrayList<lesson>>() {
+            @Override
+            public void onChanged(ArrayList<lesson> lessons) {
+                if(rcLessons.getVisibility()==View.VISIBLE){
+                    initLessonsAdapter(lessons);
+                }
+            }
+
         });
         yourProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +79,18 @@ private Button appointNewLessons;
         showStudents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                rcLessons.setVisibility(View.GONE);
                 rcStudents.setVisibility(View.VISIBLE);
                 initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
 
+            }
+        });
+        showLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rcStudents.setVisibility(View.GONE);
+                rcLessons.setVisibility(View.VISIBLE);
+                initLessonsAdapter(mainViewModelTeacher.LiveLessons.getValue());
             }
         });
         appointNewLessons.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +141,17 @@ private Button appointNewLessons;
         rcStudents.setAdapter(studentAdapter);
         rcStudents.setHasFixedSize(true);
 
+    }
+    public void initLessonsAdapter(ArrayList<lesson> lessons){
+        LessonsAdapter = new lessonsAdapter(lessons, new lessonsAdapter.OnItemClickListener() {
+            @Override
+            public void onitemClick(lesson item) {
+
+            }
+        });
+        rcLessons.setLayoutManager(new LinearLayoutManager(this));
+        rcLessons.setAdapter(LessonsAdapter);
+        rcLessons.setHasFixedSize(true);
     }
 
 }
