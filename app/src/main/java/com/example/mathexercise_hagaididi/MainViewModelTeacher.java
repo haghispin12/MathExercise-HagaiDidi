@@ -54,40 +54,43 @@ public class MainViewModelTeacher extends ViewModel {
     }
     public void lessonsListener(){
         ArrayList<lesson> temp = new ArrayList<>();
-        db.collection("lessons").whereEqualTo("teacherEmail",GetCurrentEmail()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("lessons").whereEqualTo("teacherEmail",GetCurrentEmail()).whereNotEqualTo("studentEmail",null).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                for (DocumentChange dc : value.getDocumentChanges()){
-                    switch (dc.getType()){
-                        case ADDED:
-                            String Date = dc.getDocument().getString("date");
-                            String hour = dc.getDocument().getString("hour");
-                            String teacherEmail = dc.getDocument().getString("teacherEmail");
-                            String studentEmail = dc.getDocument().getString("studentEmail");
-                            lesson temL = new lesson(Date,hour,teacherEmail,studentEmail);
-                            temp.add(temL);
-                            break;
-                        case MODIFIED:
-                            String Date1 = dc.getDocument().getString("date");
-                            String hour1 = dc.getDocument().getString("hour");
-                            String teacherEmail1 = dc.getDocument().getString("teacherEmail");
-                            String studentEmail1 = dc.getDocument().getString("studentEmail");
-                            lesson temL1 = new lesson(Date1,hour1,teacherEmail1,studentEmail1);
-                            temp.add(temL1);
-                            break;
-                        case REMOVED:
-                            String Date2 = dc.getDocument().getString("date");
-                            String hour2 = dc.getDocument().getString("hour");
-                            String teacherEmail2 = dc.getDocument().getString("teacherEmail");
-                            String studentEmail2 = dc.getDocument().getString("studentEmail");
-                            lesson temL2 = new lesson(Date2,hour2,teacherEmail2,studentEmail2);
-                            temp.add(temL2);
-                            break;
+                if(value!=null) {
+                    for (DocumentChange dc : value.getDocumentChanges()) {
+                        switch (dc.getType()) {
+                            case ADDED:
+                                String Date = dc.getDocument().getString("date");
+                                String hour = dc.getDocument().getString("hour");
+                                String teacherEmail = dc.getDocument().getString("teacherEmail");
+                                String studentEmail = dc.getDocument().getString("studentEmail");
+                                lesson temL = new lesson(Date, hour, teacherEmail, studentEmail);
+                                temp.add(temL);
+                                break;
+                            case MODIFIED:
+                                String Date1 = dc.getDocument().getString("date");
+                                String hour1 = dc.getDocument().getString("hour");
+                                String teacherEmail1 = dc.getDocument().getString("teacherEmail");
+                                String studentEmail1 = dc.getDocument().getString("studentEmail");
+                                lesson temL1 = new lesson(Date1, hour1, teacherEmail1, studentEmail1);
+                                temp.add(temL1);
+                                break;
+                            case REMOVED:
+                                String Date2 = dc.getDocument().getString("date");
+                                String hour2 = dc.getDocument().getString("hour");
+                                String teacherEmail2 = dc.getDocument().getString("teacherEmail");
+                                String studentEmail2 = dc.getDocument().getString("studentEmail");
+                                lesson temL2 = new lesson(Date2, hour2, teacherEmail2, studentEmail2);
+                                temp.add(temL2);
+                                break;
+                        }
                     }
                 }
                 LiveLessons.setValue(temp);
             }
         });
+
     }
     public void connectionsListener(){
         ArrayList<student> temp = new ArrayList<>();

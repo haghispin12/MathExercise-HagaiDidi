@@ -21,6 +21,7 @@ public class MainActivityStudent extends AppCompatActivity {
         mainViewModelStudent = new ViewModelProvider(this).get(MainViewModelStudent.class);
         initviews();
         mainViewModelStudent.IsHasATeacher();
+        mainViewModelStudent.lessonsListener();
         activity();
     }
 
