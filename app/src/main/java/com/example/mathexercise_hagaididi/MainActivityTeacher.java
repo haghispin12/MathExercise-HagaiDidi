@@ -114,7 +114,7 @@ private RecyclerView rcLessons;
                 dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                 daiActiv = dialog.findViewById(R.id.dai_Activate);
                 daiRefuse = dialog.findViewById(R.id.dai_refuse);
-                daiStatus = dialog.findViewById(R.id.diaText);
+                daiStatus = dialog.findViewById(R.id.diaTextTeacher);
                 dialog.show();
                 daiActiv.setOnClickListener(new View.OnClickListener() {
                     @Override

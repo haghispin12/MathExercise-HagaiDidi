@@ -26,7 +26,10 @@ public class MainViewModelStudent extends ViewModel {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     MutableLiveData<ArrayList<teacher>> LiveTeachers = new MutableLiveData<ArrayList<teacher>>();
     MutableLiveData<ArrayList<lesson>> LiveLessons = new MutableLiveData<>();
+    MutableLiveData<ArrayList<Boolean>> LiveIsHasTeacherBool = new MutableLiveData<>();
     private String EmailTeacher;
+    private int isHasTeacherBool = -1;
+  MutableLiveData< ArrayList<String>> LiveDates = new MutableLiveData<>();
 
 
     public String GetCurrentEmail() {
@@ -73,44 +76,51 @@ public class MainViewModelStudent extends ViewModel {
 
     }
 
-    public void getTeachers() {
-       db.collection("teachers profiles").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                ArrayList<teacher> tempTeachers = new ArrayList<teacher>();
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                    if (documentSnapshot.exists()) {
-                        String location = documentSnapshot.getString("location");
-                        String phoneNumber = documentSnapshot.getString("phoneNumber");
-                        String name = documentSnapshot.getString("name");
-                        int price = Integer.valueOf(Math.toIntExact(documentSnapshot.getLong("price")));
-                        String Email = documentSnapshot.getString("email");
-                        teacher teacher = new teacher(phoneNumber, price, location, name, Email);
-                        tempTeachers.add(teacher);
+    public void getTeachers(int i) {
+        if(i!=1) {
+            db.collection("teachers profiles").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    ArrayList<teacher> tempTeachers = new ArrayList<teacher>();
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if (documentSnapshot.exists()) {
+                            String location = documentSnapshot.getString("location");
+                            String phoneNumber = documentSnapshot.getString("phoneNumber");
+                            String name = documentSnapshot.getString("name");
+                            int price = Integer.valueOf(Math.toIntExact(documentSnapshot.getLong("price")));
+                            String Email = documentSnapshot.getString("email");
+                            teacher teacher = new teacher(phoneNumber, price, location, name, Email);
+                            tempTeachers.add(teacher);
+                        }
                     }
+                    LiveTeachers.setValue(tempTeachers);
                 }
-                LiveTeachers.setValue(tempTeachers);
-            }
-        });
+            });
+        }
     }
 
     public void IsHasATeacher() {
         db.collection("connections").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots){
-                    if(documentSnapshot.exists()){
-                        if(documentSnapshot.getString("emailStudent").equals(GetCurrentEmail())){
-                            EmailTeacher = documentSnapshot.getString("emailTeacher");
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if(isHasTeacherBool!=1) {
+                        if (documentSnapshot.exists()) {
+                            if (documentSnapshot.getString("emailStudent").equals(GetCurrentEmail()) && documentSnapshot.getString("status").equals("Active")) {
+                                isHasTeacherBool = 1;
+                                EmailTeacher = documentSnapshot.getString("emailTeacher");
+                                ArrayList<Boolean> temp = new ArrayList<Boolean>();
+                                LiveIsHasTeacherBool.setValue(temp);
+                            }
                         }
                     }
                 }
-                    getTeachers();
+                getTeachers(isHasTeacherBool);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                getTeachers();
+                getTeachers(isHasTeacherBool);
             }
         });
     }
@@ -123,5 +133,22 @@ public class MainViewModelStudent extends ViewModel {
             }
         });
 
+    }
+    public int getIsHasATeacher(){
+        return isHasTeacherBool;
+    }
+    public void getDaysWithLessons(){
+        ArrayList<String> temp= new ArrayList<String>();
+        db.collection("lessons").whereEqualTo("teacherEmail",EmailTeacher).whereEqualTo("studentEmail",null).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    if (documentSnapshot.exists()){
+                        temp.add(documentSnapshot.getString("date"));
+                    }
+                }
+                LiveDates.setValue(temp);
+            }
+        });
     }
 }

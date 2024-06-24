@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragStudent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,11 +11,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityStudent"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/noTeacher"
+        android:visibility="visible"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="welcome!"
+        android:id="@+id/welcome"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="150dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="choose your teacher"
+        android:id="@+id/choose_your_teacher"
+        android:layout_marginLeft="110dp"
+        android:textSize="20sp" />
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/teachersRecycle"
-    android:visibility="visible"
     />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/hasTeacher"
+        android:visibility="gone"
+        android:orientation="vertical">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="schedule a new lesson"
+        android:id="@+id/schedule_lesson"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="90dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="your lessons"
+        android:layout_marginLeft="115dp"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/text_yourLessons"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycle_lessons_student"/>
+    </LinearLayout>
 
 </LinearLayout>
+</FrameLayout>
