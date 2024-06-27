@@ -12,10 +12,17 @@
     app:type="one_day_picker"
     android:id="@+id/student_calendar"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_marginTop="400dp"
         android:id="@+id/lessons_students_recycle"/>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="exit"
+    android:layout_marginTop="650dp"
+    android:layout_marginLeft="250dp"
+    android:id="@+id/frag_student_exit"/>
 
 
 </FrameLayout>

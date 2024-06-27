@@ -27,6 +27,7 @@ public class MainActivityStudent extends AppCompatActivity {
     private TextView yourLessonsT;
     private LinearLayout hasTeacher;
     private LinearLayout noTeacher;
+    private Button check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,9 @@ public class MainActivityStudent extends AppCompatActivity {
     }
 
     public void initviews(){
+        check = findViewById(R.id.check);
         rcTeachers = findViewById(R.id.teachersRecycle) ;
-        rcLessonsStudent = findViewById(R.id.lessons_students_recycle);
+        rcLessonsStudent = findViewById(R.id.recycle_lessons_student);
         welcome = findViewById(R.id.welcome);
         scheduleNewLesson = findViewById(R.id.schedule_lesson);
         choseAteacher = findViewById(R.id.choose_your_teacher);
@@ -50,7 +52,18 @@ public class MainActivityStudent extends AppCompatActivity {
         hasTeacher = findViewById(R.id.hasTeacher);
     }
     public void activity(){
-
+        mainViewModelStudent.LiveLessons.observe(this, new Observer<ArrayList<lesson>>() {
+            @Override
+            public void onChanged(ArrayList<lesson> lessons) {
+                initLessonsAdapter(lessons);
+            }
+        });
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainViewModelStudent.IsHasATeacher();
+            }
+        });
         scheduleNewLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

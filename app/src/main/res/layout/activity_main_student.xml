@@ -11,6 +11,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityStudent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,9 +36,15 @@
         android:textSize="20sp" />
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="500dp"
     android:id="@+id/teachersRecycle"
     />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="check if you have a teacher"
+            android:id="@+id/check"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

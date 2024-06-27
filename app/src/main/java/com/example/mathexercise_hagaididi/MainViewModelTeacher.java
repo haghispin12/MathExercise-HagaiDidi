@@ -162,9 +162,9 @@ public class MainViewModelTeacher extends ViewModel {
         update.whereEqualTo("emailStudent",student.getEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(DocumentSnapshot dc: queryDocumentSnapshots){
+                for (DocumentSnapshot dc : queryDocumentSnapshots) {
                     String dcId = dc.getId();
-                    update.document(dcId).update("status",status);
+                    update.document(dcId).update("status", status);
                 }
             }
         });
