@@ -29,6 +29,7 @@ private Button showLessons;
 private Button appointNewLessons;
 private lessonsAdapter LessonsAdapter;
 private RecyclerView rcLessons;
+private  TextView yourText;
 
 
     @Override
@@ -48,6 +49,7 @@ private RecyclerView rcLessons;
         appointNewLessons = findViewById(R.id.appointNewLesson);
         showLessons = findViewById(R.id.button_show_lessons);
         rcLessons = findViewById(R.id.lessonsRecycle);
+        yourText = findViewById(R.id.yourText);
     }
     public void activity(){
         mainViewModelTeacher.LiveStudents.observe(this, new Observer<ArrayList<student>>() {
@@ -81,6 +83,7 @@ private RecyclerView rcLessons;
             public void onClick(View view) {
                 rcLessons.setVisibility(View.GONE);
                 rcStudents.setVisibility(View.VISIBLE);
+                yourText.setText("your students");
                 initUsersAdapter(mainViewModelTeacher.LiveStudents.getValue());
 
             }
@@ -90,6 +93,7 @@ private RecyclerView rcLessons;
             public void onClick(View view) {
                 rcStudents.setVisibility(View.GONE);
                 rcLessons.setVisibility(View.VISIBLE);
+                yourText.setText("your lessons");
                 initLessonsAdapter(mainViewModelTeacher.LiveLessons.getValue());
             }
         });

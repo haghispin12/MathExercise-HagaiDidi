@@ -20,7 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainViewModelStudent extends ViewModel {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -63,31 +66,33 @@ public class MainViewModelStudent extends ViewModel {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value!=null) {
                     for (DocumentChange dc : value.getDocumentChanges()) {
-                        switch (dc.getType()) {
-                            case ADDED:
-                                String Date = dc.getDocument().getString("date");
-                                String hour = dc.getDocument().getString("hour");
-                                String teacherEmail = dc.getDocument().getString("teacherEmail");
-                                String studentEmail = dc.getDocument().getString("studentEmail");
-                                lesson temL = new lesson(Date, hour, teacherEmail, studentEmail);
-                                temp.add(temL);
-                                break;
-                            case MODIFIED:
-                                String Date1 = dc.getDocument().getString("date");
-                                String hour1 = dc.getDocument().getString("hour");
-                                String teacherEmail1 = dc.getDocument().getString("teacherEmail");
-                                String studentEmail1 = dc.getDocument().getString("studentEmail");
-                                lesson temL1 = new lesson(Date1, hour1, teacherEmail1, studentEmail1);
-                                temp.add(temL1);
-                                break;
-                            case REMOVED:
-                                String Date2 = dc.getDocument().getString("date");
-                                String hour2 = dc.getDocument().getString("hour");
-                                String teacherEmail2 = dc.getDocument().getString("teacherEmail");
-                                String studentEmail2 = dc.getDocument().getString("studentEmail");
-                                lesson temL2 = new lesson(Date2, hour2, teacherEmail2, studentEmail2);
-                                temp.add(temL2);
-                                break;
+                        if (checkDate(dc.getDocument().getString("date"))) {
+                            switch (dc.getType()) {
+                                case ADDED:
+                                    String Date = dc.getDocument().getString("date");
+                                    String hour = dc.getDocument().getString("hour");
+                                    String teacherEmail = dc.getDocument().getString("teacherEmail");
+                                    String studentEmail = dc.getDocument().getString("studentEmail");
+                                    lesson temL = new lesson(Date, hour, teacherEmail, studentEmail);
+                                    temp.add(temL);
+                                    break;
+                                case MODIFIED:
+                                    String Date1 = dc.getDocument().getString("date");
+                                    String hour1 = dc.getDocument().getString("hour");
+                                    String teacherEmail1 = dc.getDocument().getString("teacherEmail");
+                                    String studentEmail1 = dc.getDocument().getString("studentEmail");
+                                    lesson temL1 = new lesson(Date1, hour1, teacherEmail1, studentEmail1);
+                                    temp.add(temL1);
+                                    break;
+                                case REMOVED:
+                                    String Date2 = dc.getDocument().getString("date");
+                                    String hour2 = dc.getDocument().getString("hour");
+                                    String teacherEmail2 = dc.getDocument().getString("teacherEmail");
+                                    String studentEmail2 = dc.getDocument().getString("studentEmail");
+                                    lesson temL2 = new lesson(Date2, hour2, teacherEmail2, studentEmail2);
+                                    temp.add(temL2);
+                                    break;
+                            }
                         }
                     }
                 }
@@ -183,5 +188,20 @@ public class MainViewModelStudent extends ViewModel {
                 }
             }
         });
+    }
+    public boolean checkDate(String Date1)  {
+        Calendar currentCalendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String[] dateParts = Date1.split("/");
+        int day = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]) - 1;
+        int year = Integer.parseInt(dateParts[2]);
+        Calendar dateToCheck = Calendar.getInstance();
+        dateToCheck.set(year, month, day);
+        long timeToCheck = dateToCheck.getTimeInMillis();
+        long currentTime = currentCalendar.getTimeInMillis();
+        String sss = dateFormat.format(currentCalendar.getTime());
+        boolean result = timeToCheck > currentTime;
+        return result;
     }
 }

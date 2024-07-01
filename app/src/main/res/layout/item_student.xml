@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/b3">
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:textColor="@color/white"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -16,6 +18,7 @@
             android:text="name:"
             android:id="@+id/textNameS"
             android:gravity="right"
+            android:textColor="@color/white"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -23,6 +26,7 @@
             android:layout_weight="20"
             android:id="@+id/yourNameS"
             android:gravity="left"
+            android:textColor="@color/white"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +35,7 @@
             android:text="status:"
             android:layout_weight="10"
             android:id="@+id/textStatus"
+            android:textColor="@color/white"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -38,6 +43,7 @@
             android:layout_weight="20"
             android:gravity="left"
             android:id="@+id/yourStatus"
+            android:textColor="@color/white"
             />
 
     </LinearLayout>

@@ -103,8 +103,9 @@ public void activity() {
 }
     public void activateSpinner(){
         String[] optionsTorS = {"teacher","student"};
-        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, optionsTorS);
+        ArrayAdapter ad = new ArrayAdapter(this, R.layout.spinner_item, optionsTorS);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         TorS.setAdapter(ad);
     }
 }

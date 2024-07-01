@@ -4,25 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment_student">
+    tools:context=".fragment_student"
+    android:background="@drawable/b4">
 
-<com.applandeo.materialcalendarview.CalendarView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:type="one_day_picker"
-    android:id="@+id/student_calendar"/>
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/student_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/b4"
+        android:padding="30dp"
+        app:type="one_day_picker" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="400dp"
-        android:id="@+id/lessons_students_recycle"/>
+        android:id="@+id/lessons_students_recycle"
+        />
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="exit"
     android:layout_marginTop="650dp"
     android:layout_marginLeft="250dp"
-    android:id="@+id/frag_student_exit"/>
+    android:id="@+id/frag_student_exit"
+    android:backgroundTint="@color/teal_200"
+    android:textColor="@color/black"/>/>
 
 
 </FrameLayout>

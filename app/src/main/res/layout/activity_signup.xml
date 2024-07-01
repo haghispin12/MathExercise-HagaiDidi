@@ -7,40 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".signupActivity"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/b2">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sign up"
-        android:id="@+id/textview_signup"/>
+        android:id="@+id/textview_signup"
+        android:textSize="30sp"
+        android:textColor="@color/white"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:id="@+id/edittext_email"/>
+        android:id="@+id/edittext_email"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="password"
-        android:id="@+id/edittext_password"/>
+        android:id="@+id/edittext_password"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="confirm password"
-        android:id="@+id/edittext_confirmPassword"/>
+        android:id="@+id/edittext_confirmPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_TorS"/>
+        android:id="@+id/spinner_TorS"
+        android:backgroundTint="@color/white"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="submit"
-        android:id="@+id/button_submit"/>
+        android:id="@+id/button_submit"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@color/black"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="log in"
-        android:id="@+id/button_login"/>
+        android:id="@+id/button_login"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@color/black"/>
 
 </LinearLayout>

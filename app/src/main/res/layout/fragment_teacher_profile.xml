@@ -5,39 +5,55 @@
     android:layout_height="match_parent"
     tools:context=".fragmentTeacherProfile"
     android:clickable="true"
-    android:background="@color/white"
+    android:background="@drawable/b2"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="edit your profile"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:layout_marginBottom="30dp"/>
 <EditText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:hint="your name"
     android:id="@+id/edittext_teachersname"
-    />
+    android:textColor="@color/white"
+    android:textColorHint="@color/white"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="price"
         android:id="@+id/editText_price"
-        />
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
 
     <EditText
         android:id="@+id/edittext_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="location" />
+        android:hint="location"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
 <EditText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:hint="phone number"
-    android:id="@+id/editText_phonenumber"/>
+    android:id="@+id/editText_phonenumber"
+    android:textColor="@color/white"
+    android:textColorHint="@color/white"/>
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="confirm"
-    android:id="@+id/button_confirm"/>
+    android:id="@+id/button_confirm"
+    android:backgroundTint="@color/teal_200"
+    android:textColor="@color/black"/>/>
     </LinearLayout>
 </FrameLayout>
