@@ -50,7 +50,6 @@ public class fragmentTeacherLessons extends Fragment {
             public void onClick(@NonNull CalendarDay calendarDay) {
                 Calendar calendar = calendarDay.getCalendar();
 
-                // Format the date to display in TextView
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String formattedDate = sdf.format(calendar.getTime());
                 selectedDate.setText(formattedDate);
@@ -59,7 +58,7 @@ public class fragmentTeacherLessons extends Fragment {
         addLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                lesson lesson = new lesson(selectedDate.getText().toString(),selectHour.getText().toString(),mainViewModelTeacher.GetCurrentEmail(),null);
+                lesson lesson = new lesson(selectedDate.getText().toString(),selectHour.getText().toString(),mainViewModelTeacher.GetCurrentEmail(),"");
                 mainViewModelTeacher.addLesson(lesson);
                 getActivity().getSupportFragmentManager().beginTransaction().remove(fragmentTeacherLessons.this).commit();
             }

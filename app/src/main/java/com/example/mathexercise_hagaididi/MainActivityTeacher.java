@@ -1,6 +1,8 @@
 package com.example.mathexercise_hagaididi;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ private Button appointNewLessons;
 private lessonsAdapter LessonsAdapter;
 private RecyclerView rcLessons;
 private  TextView yourText;
+    private BatteryReceiver batteryReceiver;
 
 
     @Override
@@ -41,6 +44,7 @@ private  TextView yourText;
         mainViewModelTeacher.connectionsListener();
         mainViewModelTeacher.lessonsListener();
         activity();
+        activateReceiver();
     }
     public void initviews(){
         yourProfile = findViewById(R.id.button_yourProfile);
@@ -157,5 +161,15 @@ private  TextView yourText;
         rcLessons.setAdapter(LessonsAdapter);
         rcLessons.setHasFixedSize(true);
     }
+public void activateReceiver(){
+        batteryReceiver = new BatteryReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryReceiver, intentFilter);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(batteryReceiver);
+    }
 }

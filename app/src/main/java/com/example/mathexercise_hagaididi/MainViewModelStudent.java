@@ -42,7 +42,7 @@ public class MainViewModelStudent extends ViewModel {
     }
     public void GetLessonsListenerPerDate(String Date) {
         ArrayList<lesson> temp = new ArrayList<>();
-        db.collection("lessons").whereEqualTo("teacherEmail", EmailTeacher).whereEqualTo("date", Date).whereEqualTo("studentEmail",null).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("lessons").whereEqualTo("teacherEmail", EmailTeacher).whereEqualTo("date", Date).whereEqualTo("studentEmail","").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
@@ -165,7 +165,7 @@ public class MainViewModelStudent extends ViewModel {
     }
     public void getDaysWithLessons(){
         ArrayList<String> temp= new ArrayList<String>();
-        db.collection("lessons").whereEqualTo("teacherEmail",EmailTeacher).whereEqualTo("studentEmail",null).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("lessons").whereEqualTo("teacherEmail",EmailTeacher).whereEqualTo("studentEmail","").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots){

@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +30,7 @@ public class MainActivityStudent extends AppCompatActivity {
     private LinearLayout hasTeacher;
     private LinearLayout noTeacher;
     private Button check;
+    private BatteryReceiver batteryReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,8 @@ public class MainActivityStudent extends AppCompatActivity {
         initviews();
         mainViewModelStudent.IsHasATeacher();
         mainViewModelStudent.lessonsListener();
-
         activity();
+        activateReceiver();
     }
 
     public void initviews(){
@@ -117,5 +120,17 @@ public class MainActivityStudent extends AppCompatActivity {
             noTeacher.setVisibility(View.GONE);
             hasTeacher.setVisibility(View.VISIBLE);
         }
+    }
+    public void activateReceiver(){
+        batteryReceiver = new BatteryReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        unregisterReceiver(batteryReceiver);
     }
     }

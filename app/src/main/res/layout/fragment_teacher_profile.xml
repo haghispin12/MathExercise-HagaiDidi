@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragmentTeacherProfile"
     android:clickable="true"
-    android:background="@drawable/b2"
+    android:background="@drawable/b4"
     >
     <LinearLayout
         android:layout_width="match_parent"

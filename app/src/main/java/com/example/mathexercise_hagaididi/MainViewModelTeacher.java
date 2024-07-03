@@ -45,26 +45,12 @@ public class MainViewModelTeacher extends ViewModel {
             }
         });
     }
-//    public void getStudents() {
-//        db.collection("connections").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-//                    ArrayList<student> tempStudents;
-//                    if (documentSnapshot.exists()) {
-//
-//                    }
-//                }
-//            }
-//
-//        });
-//    }
     public void lessonsListener(){
         ArrayList<lesson> temp = new ArrayList<>();
-        db.collection("lessons").whereEqualTo("teacherEmail",GetCurrentEmail()).whereNotEqualTo("studentEmail",null).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("lessons").whereEqualTo("teacherEmail",GetCurrentEmail()).whereNotEqualTo("studentEmail","").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value!=null) {
+               if(value!=null) {
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (checkDate(dc.getDocument().getString("date"))) {
                             switch (dc.getType()) {
