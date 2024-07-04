@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,11 +23,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.text.ParseException;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class MainViewModelTeacher extends ViewModel {
@@ -38,6 +42,24 @@ public class MainViewModelTeacher extends ViewModel {
     MutableLiveData<ArrayList<student>> LiveStudents = new MutableLiveData<>();
     MutableLiveData<ArrayList<lesson>> LiveLessons = new MutableLiveData<>();
 
+    public void deleteProfile(){
+        CollectionReference collection =   db.collection("teachers profiles");
+        db.collection("teachers profiles").whereEqualTo("email",GetCurrentEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(queryDocumentSnapshots != null){
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        collection.document(documentSnapshot.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
     public void editProfile(teacher teacher){
         db.collection("teachers profiles").document().set(teacher).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

@@ -55,6 +55,7 @@ public class fragmentTeacherProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 teacher teacher = new teacher(phoneNumber.getText().toString(),Integer.valueOf(price.getText().toString()),location.getText().toString(),name.getText().toString(), mainViewModelTeacher.GetCurrentEmail());
+                mainViewModelTeacher.deleteProfile();
                 mainViewModelTeacher.editProfile(teacher);
                 getActivity().getSupportFragmentManager().beginTransaction().remove(fragmentTeacherProfile.this).commit();
             }
